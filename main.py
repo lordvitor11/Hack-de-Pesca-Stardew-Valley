@@ -1,4 +1,8 @@
+import keyboard;
+# from pynput.keyboard import Key, Listener;
+# import time;
 import PySimpleGUI as sg;
+import pyautogui as pg;
 
 # def setLanguage(lang):
 #     global language, layout2;
@@ -32,8 +36,21 @@ import PySimpleGUI as sg;
 # layout = [[sg.Column(layout1, key="COL1")],
 #           [sg.Column(layout2, key="COL2", visible=False)]];
 
+keys = []
+def show(key):
+    global keys;
+    keys.append(key);
+    print(keys)
+    if (len(keys) == 3):
+        del keys[0];
+    else:
+        if (keys[0] == Key.ctrl and keys[1] == "j"):
+            pg.mouseDown(button=left, duration=2);
+            # time.sleep(2);
+            # pg.mouseUp();
+
 layout = [[sg.Text("Choose the fishing rod you are using:")],
-          [sg.Combo(["Training rod", "Bamboo pole", "Fiberglass rod", "Iridium rod"], default_value="Bamboo Pole")],
+          #[sg.Combo(["Training rod", "Bamboo pole", "Fiberglass rod", "Iridium rod"], default_value="Bamboo Pole")],
           [sg.Button("Exit")]];
 
 mainWindow = sg.Window("Hack Stardew Valley", layout);
@@ -44,6 +61,13 @@ while (True):
     event, values = mainWindow.read();
     if (event == sg.WIN_CLOSED or event == "Sair"):
         break;
+
+    while (True):
+        if (keyboard.is_pressed("q")):
+            print("a")
+
+    # with Listener(on_press = show) as listener:
+    #     listener.join();
     
     # if (event == "Confirm"):
     #     setLanguage(values["comboLang"]);
